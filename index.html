@@ -527,27 +527,29 @@
 
 
 
+ca-app-pub-5022318775285006/8526205704
+    
 
     
     
-    <!-- Ad Unit (Under Header) -->
-    <div class="container">
-        <div class="ad-banner">
-            <span>Google AdMob Ad Unit (728x90) - ca-app-pub-5022318775285006/3354987698
-        </div>
-    </div>
+    <script>
+    // Load interstitial ad
+    document.addEventListener('DOMContentLoaded', function() {
+        if(typeof admob !== 'undefined') {
+            admob.requestInterstitial({
+                publisherId: 'ca-app-pub-5022318775285006',
+                interstitialAdId: '8526205704'
+            });
+            
+            // Show the ad when needed (like before page exit or after an action)
+            admob.showInterstitial();
+        }
+    });
+</script>
 
 
 
 
-
-// For banners
-data-ad-test="on"
-
-// For interstitials (Android)
-interstitialAdId: 'ca-app-pub-3940256099942544/1033173712'
-// For interstitials (iOS)
-interstitialAdId: 'ca-app-pub-3940256099942544/4411468910'
 
     
 
@@ -761,6 +763,8 @@ interstitialAdId: 'ca-app-pub-3940256099942544/4411468910'
         </div>
     </footer>
 
+
+
     <script>
         // Simple animations for the page
         document.addEventListener('DOMContentLoaded', function() {
@@ -805,6 +809,15 @@ interstitialAdId: 'ca-app-pub-3940256099942544/4411468910'
                     this.style.transform = "translateY(0)";
                 });
             });
+        });
+
+        // For banners
+data-ad-test="on"
+
+// For interstitials (Android)
+interstitialAdId: 'ca-app-pub-5022318775285006/8526205704'
+// For interstitials (iOS)
+interstitialAdId: 'ca-app-pub-5022318775285006/8526205704'
         });
     </script>
 </body>
