@@ -6,1079 +6,297 @@
     <title>PixelCraft Pro | Advanced Image Processing Suite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <style>
-        :root {
-            --primary: #4a6fa5;
-            --primary-light: #e6f0ff;
-            --secondary: #166088;
-            --accent: #6c5ce7;
-            --light: #f8f9fa;
-            --dark: #2d3436;
-            --gray: #636e72;
-            --light-gray: #dfe6e9;
-            --border-radius: 16px;
-            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding-bottom: 60px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--dark);
-        }
-
-        /* Ad Banner */
-        .ad-banner {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            margin: 20px auto;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            max-width: 728px;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-        }
-
-        .ad-banner span {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 60px 0 40px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 30px;
-            font-size: 1.2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.4);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 111, 165, 0.5);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-light);
-            transform: translateY(-3px);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .section-title p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 35px 30px;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        .service-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            z-index: -1;
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 32px;
-            color: var(--primary);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .service-card p {
-            color: var(--gray);
-            margin-bottom: 25px;
-        }
-
-        .service-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .service-link:hover {
-            gap: 12px;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
-            border-radius: var(--border-radius);
-            margin: 40px 0;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--gray);
-        }
-
-        /* Tool Pages */
-        .tool-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .tool-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .tool-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .tool-header p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .upload-area {
-            border: 2px dashed var(--light-gray);
-            border-radius: var(--border-radius);
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .upload-area:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .upload-text {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-
-        .upload-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .upload-btn:hover {
-            background: var(--secondary);
-        }
-
-        .tool-options {
-            background: var(--light);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .option-group {
-            margin-bottom: 20px;
-        }
-
-        .option-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .option-group input,
-        .option-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .process-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            display: block;
-            margin: 0 auto;
-            transition: var(--transition);
-        }
-
-        .process-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 111, 165, 0.5);
-        }
-
-        .result-area {
-            display: none;
-            margin-top: 40px;
-            text-align: center;
-        }
-
-        .result-image {
-            max-width: 100%;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .download-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: var(--transition);
-        }
-
-        .download-btn:hover {
-            background: #5d4acf;
-            transform: translateY(-2px);
-        }
-
-        /* Footer Ad */
-        .footer-ad {
-            background: var(--light-gray);
-            border-radius: var(--border-radius);
-            margin: 40px auto 30px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            max-width: 728px;
-            height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-        }
-
-        footer {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 50px 0 30px;
-            box-shadow: var(--box-shadow);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            color: var(--dark);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--gray);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            gap: 15px;
-        }
-
-        .footer-links a i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            color: var(--primary);
-            transition: var(--transition);
-            text-decoration: none;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            color: var(--gray);
-            font-size: 0.9rem;
-            padding-top: 30px;
-            border-top: 1px solid var(--light-gray);
-        }
-
-        /* Page Content */
-        .page-content {
-            display: none;
-        }
-
-        .active-page {
-            display: block;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: row;
-                gap: 15px;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: white;
-                flex-direction: column;
-                gap: 0;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 20px 0;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links a {
-                padding: 15px 30px;
-                border-bottom: 1px solid var(--light-gray);
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .upload-area {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            .tool-container {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo" onclick="showPage('home'); return false;">
+                <a href="index.html" class="logo">
                     <div class="logo-icon">
                         <i class="fas fa-crop-alt"></i>
                     </div>
                     <div class="logo-text">PixelCraft Pro</div>
                 </a>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
+                
+                <!-- Mobile menu toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
+                
+                <!-- Navigation -->
                 <nav class="nav-links" id="navLinks">
-                    <a href="#" onclick="showPage('home'); return false;"><i class="fas fa-home"></i> Home</a>
-                    <a href="#" onclick="showPage('services'); return false;"><i class="fas fa-tools"></i> Services</a>
-                    <a href="#" onclick="showPage('about'); return false;"><i class="fas fa-info-circle"></i> About</a>
-                    <a href="#" onclick="showPage('support'); return false;"><i class="fas fa-headset"></i> Support</a>
+                    <a href="index.html"><i class="fas fa-home"></i><span>Home</span></a>
+                    <a href="#services"><i class="fas fa-tools"></i><span>Services</span></a>
+                    <a href="about.html"><i class="fas fa-info-circle"></i><span>About</span></a>
+                    <a href="support.html"><i class="fas fa-headset"></i><span>Support</span></a>
                 </nav>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
     <!-- Ad Banner -->
     <div class="container">
         <div class="ad-banner">
-            <span>Google AdMob Ad Unit (728x90) - ca-app-pub-5022318775285006/3354987698</span>
+            <span>Advertisement Space - 728x90</span>
         </div>
     </div>
-
-    <!-- Home Page -->
-    <div id="home" class="page-content active-page">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
                 <h1>Transform Your Images with AI-Powered Tools</h1>
-                <p>Professional-grade image processing suite for designers, developers, and content creators</p>
+                <p>Professional-grade image processing suite for designers, developers, and content creators. Experience the power of AI-driven image manipulation at your fingertips.</p>
                 
                 <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="showPage('services')">
+                    <button class="btn btn-primary" onclick="scrollToServices()">
                         <i class="fas fa-bolt"></i> Get Started Free
                     </button>
-                    <button class="btn btn-secondary">
+                    <button class="btn btn-secondary" onclick="openDemo()">
                         <i class="fas fa-video"></i> Watch Demo
                     </button>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Services Section -->
-        <section id="services-section" class="services">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Our Powerful Tools</h2>
-                    <p>Everything you need for professional image editing in one place</p>
-                </div>
                 
-                <div class="services-grid">
-                    <!-- Image Compressor -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #e3f2fd; color: #2196f3;">
-                            <i class="fas fa-compress-alt"></i>
-                        </div>
-                        <h3>Image Compressor</h3>
-                        <p>Reduce file size without losing quality. Perfect for web optimization.</p>
-                        <a href="#" class="service-link" onclick="showPage('compressor'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
+                <!-- Feature highlights -->
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No Registration Required</span>
                     </div>
-                    
-                    <!-- Background Remover -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #e8f5e9; color: #4caf50;">
-                            <i class="fas fa-cut"></i>
-                        </div>
-                        <h3>ClearCut-BG</h3>
-                        <p>Remove backgrounds automatically with AI precision in seconds.</p>
-                        <a href="#" class="service-link" onclick="showPage('bg-remover'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% Free Tools</span>
                     </div>
-                    
-                    <!-- Image Resizer -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #fff3e0; color: #ff9800;">
-                            <i class="fas fa-expand-alt"></i>
-                        </div>
-                        <h3>Resizer Pro</h3>
-                        <p>Resize and crop images to any dimension with smart AI assistance.</p>
-                        <a href="#" class="service-link" onclick="showPage('resizer'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Instant Processing</span>
                     </div>
-                    
-                    <!-- Text to PDF -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #f3e5f5; color: #9c27b0;">
-                            <i class="fas fa-file-pdf"></i>
-                        </div>
-                        <h3>Text to PDF</h3>
-                        <p>Convert text documents to professional PDFs with custom layouts.</p>
-                        <a href="#" class="service-link" onclick="showPage('text-to-pdf'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    
-                    <!-- AI Image Generator -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #e0f7fa; color: #00bcd4;">
-                            <i class="fas fa-robot"></i>
-                        </div>
-                        <h3>AI Image Generator</h3>
-                        <p>Create stunning visuals from text prompts with advanced AI models.</p>
-                        <a href="#" class="service-link" onclick="showPage('ai-generator'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    
-                    <!-- Image to Text -->
-                    <div class="service-card">
-                        <div class="service-icon" style="background: #ffebee; color: #f44336;">
-                            <i class="fas fa-text-height"></i>
-                        </div>
-                        <h3>Image to Text</h3>
-                        <p>Extract text and code from images with OCR technology powered by AI.</p>
-                        <a href="#" class="service-link" onclick="showPage('image-to-text'); return false;">
-                            Use Tool <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Why Choose PixelCraft Pro</h2>
-                    <p>Professional tools designed for creators and businesses</p>
-                </div>
-                
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3>Lightning Fast</h3>
-                        <p>Process images in seconds with our optimized algorithms and cloud infrastructure.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Secure & Private</h3>
-                        <p>Your files are automatically deleted after processing. We never store your data.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-infinity"></i>
-                        </div>
-                        <h3>Unlimited Processing</h3>
-                        <p>No limits on file sizes or number of images. Process as much as you need.</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>Fully Responsive</h3>
-                        <p>Access all tools from any device. Our interface works perfectly on mobile.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Tool Pages -->
-    <!-- Image Compressor Tool -->
-    <div id="compressor" class="page-content">
-        <div class="container">
-            <div class="tool-container">
-                <div class="tool-header">
-                    <h1>Image Compressor</h1>
-                    <p>Reduce image file size without losing quality. Perfect for web optimization.</p>
-                </div>
-                
-                <div class="upload-area" id="compressorUploadArea">
-                    <div class="upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <p class="upload-text">Drag & drop your image here or click to browse</p>
-                    <button class="upload-btn">Select Image</button>
-                </div>
-                
-                <div class="tool-options">
-                    <div class="option-group">
-                        <label for="compression-level">Compression Level</label>
-                        <select id="compression-level">
-                            <option value="low">Low Compression (Best Quality)</option>
-                            <option value="medium" selected>Medium Compression (Recommended)</option>
-                            <option value="high">High Compression (Smaller Size)</option>
-                        </select>
-                    </div>
-                    
-                    <div class="option-group">
-                        <label for="max-width">Maximum Width (px) - Optional</label>
-                        <input type="number" id="max-width" placeholder="Original width">
-                    </div>
-                    
-                    <div class="option-group">
-                        <label for="max-height">Maximum Height (px) - Optional</label>
-                        <input type="number" id="max-height" placeholder="Original height">
-                    </div>
-                </div>
-                
-                <button class="process-btn" onclick="processImage('compressor')">Compress Image</button>
-                
-                <div class="result-area" id="compressorResult">
-                    <img src="" alt="Compressed Result" class="result-image" id="compressorResultImage">
-                    <p>Image compressed successfully! Size reduced by <span id="size-reduction">0%</span></p>
-                    <button class="download-btn" onclick="downloadResult('compressor')">
-                        <i class="fas fa-download"></i> Download Compressed Image
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Background Remover Tool -->
-    <div id="bg-remover" class="page-content">
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="services">
         <div class="container">
-            <div class="tool-container">
-                <div class="tool-header">
-                    <h1>ClearCut Background Remover</h1>
-                    <p>Remove image backgrounds automatically with AI precision in seconds.</p>
+            <div class="section-title">
+                <h2>Our Powerful Tools</h2>
+                <p>Everything you need for professional image editing in one place</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Image Compressor -->
+                <div class="service-card" data-service="compressor">
+                    <div class="service-icon" style="background: #e3f2fd; color: #2196f3;">
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <h3>Image Compressor</h3>
+                    <p>Reduce file size without losing quality. Perfect for web optimization and faster loading times.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 50K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                    <a href="tools/compressor.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 
-                <div class="upload-area" id="bgRemoverUploadArea">
-                    <div class="upload-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
+                <!-- Background Remover -->
+                <div class="service-card" data-service="background-remover">
+                    <div class="service-icon" style="background: #e8f5e9; color: #4caf50;">
+                        <i class="fas fa-cut"></i>
                     </div>
-                    <p class="upload-text">Drag & drop your image here or click to browse</p>
-                    <button class="upload-btn">Select Image</button>
+                    <h3>ClearCut-BG</h3>
+                    <p>Remove backgrounds automatically with AI precision in seconds. Perfect for product photos and portraits.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 75K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                    <a href="tools/background-remover.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 
-                <div class="tool-options">
-                    <div class="option-group">
-                        <label for="bg-color">Background Replacement</label>
-                        <select id="bg-color">
-                            <option value="transparent" selected>Transparent</option>
-                            <option value="white">White</option>
-                            <option value="black">Black</option>
-                            <option value="custom">Custom Color</option>
-                        </select>
+                <!-- Image Resizer -->
+                <div class="service-card" data-service="resizer">
+                    <div class="service-icon" style="background: #fff3e0; color: #ff9800;">
+                        <i class="fas fa-expand-alt"></i>
                     </div>
-                    
-                    <div class="option-group" id="custom-color-group" style="display: none;">
-                        <label for="custom-bg-color">Custom Background Color</label>
-                        <input type="color" id="custom-bg-color" value="#ffffff">
+                    <h3>Resizer Pro</h3>
+                    <p>Resize and crop images to any dimension with smart AI assistance. Maintain quality at any size.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 40K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.7/5</span>
                     </div>
-                    
-                    <div class="option-group">
-                        <label for="edge-refinement">Edge Refinement</label>
-                        <select id="edge-refinement">
-                            <option value="low">Low</option>
-                            <option value="medium" selected>Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </div>
+                    <a href="tools/resizer.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
                 
-                <button class="process-btn" onclick="processImage('bg-remover')">Remove Background</button>
+                <!-- Text to PDF -->
+                <div class="service-card" data-service="text-to-pdf">
+                    <div class="service-icon" style="background: #f3e5f5; color: #9c27b0;">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Text to PDF</h3>
+                    <p>Convert text documents to professional PDFs with custom layouts and formatting options.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 30K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.6/5</span>
+                    </div>
+                    <a href="tools/text-to-pdf.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
                 
-                <div class="result-area" id="bgRemoverResult">
-                    <img src="" alt="Background Removed" class="result-image" id="bgRemoverResultImage">
-                    <p>Background removed successfully!</p>
-                    <button class="download-btn" onclick="downloadResult('bg-remover')">
-                        <i class="fas fa-download"></i> Download Image
-                    </button>
+                <!-- AI Image Generator -->
+                <div class="service-card" data-service="ai-generator">
+                    <div class="service-icon" style="background: #e0f7fa; color: #00bcd4;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Image Generator</h3>
+                    <p>Create stunning visuals from text prompts with advanced AI models. Unleash your creativity.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 100K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                    <a href="tools/ai-generator.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Image to Text -->
+                <div class="service-card" data-service="image-to-text">
+                    <div class="service-icon" style="background: #ffebee; color: #f44336;">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <h3>Image to Text</h3>
+                    <p>Extract text and code from images with OCR technology powered by advanced AI recognition.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 60K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                    <a href="tools/image-to-text.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Other tool pages would follow the same pattern -->
-    <!-- About Page -->
-    <div id="about" class="page-content">
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
         <div class="container">
-            <div class="tool-container">
-                <div class="tool-header">
-                    <h1>About PixelCraft Pro</h1>
-                    <p>Learn about our mission, vision, and the team behind our powerful image processing tools</p>
+            <div class="section-title">
+                <h2>Why Choose PixelCraft Pro</h2>
+                <p>Professional tools designed for creators and businesses worldwide</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process images in seconds with our optimized algorithms and cloud infrastructure powered by cutting-edge technology.</p>
                 </div>
                 
-                <div style="text-align: left;">
-                    <h2>Our Story</h2>
-                    <p>PixelCraft Pro was founded in 2020 with a simple mission: to make professional-grade image processing tools accessible to everyone. We believe that powerful editing capabilities should be available to designers, developers, and content creators without the need for expensive software or extensive technical knowledge.</p>
-                    
-                    <h2>Our Technology</h2>
-                    <p>We leverage cutting-edge AI and machine learning algorithms to deliver exceptional results. Our tools are built on a robust cloud infrastructure that ensures fast processing times and reliable performance, even with large files.</p>
-                    
-                    <h2>Our Team</h2>
-                    <p>We're a diverse team of engineers, designers, and AI specialists passionate about creating tools that empower creativity. With decades of combined experience in image processing and web technologies, we're committed to continuously improving our platform.</p>
-                    
-                    <h2>Our Values</h2>
-                    <ul style="margin-left: 20px; margin-bottom: 20px;">
-                        <li><strong>Privacy First:</strong> We never store your images after processing</li>
-                        <li><strong>Accessibility:</strong> Tools designed for users of all skill levels</li>
-                        <li><strong>Innovation:</strong> Continuously improving with the latest technologies</li>
-                        <li><strong>Quality:</strong> Delivering professional-grade results every time</li>
-                    </ul>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Your files are automatically deleted after processing. We never store your data and ensure complete privacy protection.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Unlimited Processing</h3>
+                    <p>No limits on file sizes or number of images. Process as much as you need without any restrictions or hidden fees.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Fully Responsive</h3>
+                    <p>Access all tools from any device. Our interface works perfectly on mobile, tablet, and desktop platforms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Advanced artificial intelligence ensures the highest quality results with intelligent processing and optimization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Trusted by 500K+</h3>
+                    <p>Join over half a million users who trust PixelCraft Pro for their daily image processing needs.</p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Support Page -->
-    <div id="support" class="page-content">
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="container">
-            <div class="tool-container">
-                <div class="tool-header">
-                    <h1>Support Center</h1>
-                    <p>Get help with our tools, report issues, or contact our support team</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="500000">0</div>
+                    <div class="stat-label">Happy Users</div>
                 </div>
-                
-                <div style="text-align: left;">
-                    <h2>Frequently Asked Questions</h2>
-                    
-                    <div style="margin-bottom: 25px;">
-                        <h3>How does the image compression work?</h3>
-                        <p>Our compression algorithm uses advanced techniques to reduce file size while maintaining visual quality. You can adjust the compression level based on your needs.</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 25px;">
-                        <h3>Is there a file size limit?</h3>
-                        <p>We support files up to 50MB for most tools. For premium users, this limit is increased to 200MB.</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 25px;">
-                        <h3>Are my images stored on your servers?</h3>
-                        <p>No. We process images in memory and automatically delete them immediately after processing. We never store your files.</p>
-                    </div>
-                    
-                    <div style="margin-bottom: 25px;">
-                        <h3>What image formats are supported?</h3>
-                        <p>We support JPEG, PNG, WebP, GIF, and BMP formats for input. Output formats vary by tool.</p>
-                    </div>
-                    
-                    <h2>Contact Support</h2>
-                    <p>Can't find what you're looking for? Our support team is here to help.</p>
-                    
-                    <div class="tool-options">
-                        <div class="option-group">
-                            <label for="support-name">Your Name</label>
-                            <input type="text" id="support-name" placeholder="Enter your name">
-                        </div>
-                        
-                        <div class="option-group">
-                            <label for="support-email">Email Address</label>
-                            <input type="email" id="support-email" placeholder="Enter your email">
-                        </div>
-                        
-                        <div class="option-group">
-                            <label for="support-message">Message</label>
-                            <textarea id="support-message" placeholder="Describe your issue or question" rows="5" style="width: 100%; padding: 12px 15px; border: 1px solid var(--light-gray); border-radius: 8px; font-size: 16px;"></textarea>
-                        </div>
-                    </div>
-                    
-                    <button class="process-btn">Send Message</button>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="2500000">0</div>
+                    <div class="stat-label">Images Processed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="99">0</div>
+                    <div class="stat-label">% Uptime</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Powerful Tools</div>
                 </div>
             </div>
         </div>
-    </div>
-
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Get the latest updates about new features and tools. No spam, unsubscribe anytime.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" id="emailInput" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
     <!-- Footer Ad -->
     <div class="container">
         <div class="footer-ad">
-            <span>Google AdMob Ad Unit (728x90) - ca-app-pub-5022318775285006/3354987698</span>
+            <span>Advertisement Space - 728x90</span>
         </div>
     </div>
     
@@ -1089,23 +307,25 @@
                 <div class="footer-column">
                     <h3>PixelCraft Pro</h3>
                     <p style="color: var(--gray); margin-bottom: 20px;">
-                        Professional image processing tools for creators, designers, and developers.
+                        Professional image processing tools for creators, designers, and developers. Trusted by over 500,000 users worldwide.
                     </p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Tools</h3>
                     <ul class="footer-links">
-                        <li><a href="#" onclick="showPage('compressor'); return false;"><i class="fas fa-compress-alt"></i> Image Compressor</a></li>
-                        <li><a href="#" onclick="showPage('bg-remover'); return false;"><i class="fas fa-cut"></i> Background Remover</a></li>
-                        <li><a href="#" onclick="showPage('resizer'); return false;"><i class="fas fa-expand-alt"></i> Image Resizer</a></li>
-                        <li><a href="#" onclick="showPage('text-to-pdf'); return false;"><i class="fas fa-file-pdf"></i> Text to PDF</a></li>
+                        <li><a href="tools/compressor.html"><i class="fas fa-compress-alt"></i> Image Compressor</a></li>
+                        <li><a href="tools/background-remover.html"><i class="fas fa-cut"></i> Background Remover</a></li>
+                        <li><a href="tools/resizer.html"><i class="fas fa-expand-alt"></i> Image Resizer</a></li>
+                        <li><a href="tools/text-to-pdf.html"><i class="fas fa-file-pdf"></i> Text to PDF</a></li>
+                        <li><a href="tools/ai-generator.html"><i class="fas fa-robot"></i> AI Generator</a></li>
+                        <li><a href="tools/image-to-text.html"><i class="fas fa-text-height"></i> Image to Text</a></li>
                     </ul>
                 </div>
                 
@@ -1116,130 +336,59 @@
                         <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
                         <li><a href="#"><i class="fas fa-video"></i> Tutorials</a></li>
                         <li><a href="#"><i class="fas fa-code"></i> API</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Legal</h3>
+                    <h3>Legal & Support</h3>
                     <ul class="footer-links">
                         <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
                         <li><a href="#"><i class="fas fa-lock"></i> Privacy Policy</a></li>
                         <li><a href="#"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
-                        <li><a href="#"><i class="fas fa-shield-alt"></i> Security</a></li>
+                        <li><a href="support.html"><i class="fas fa-headset"></i> Support Center</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                &copy; 2023 PixelCraft Pro. All rights reserved.
+                &copy; 2024 PixelCraft Pro. All rights reserved. Made with ❤️ for creators worldwide.
             </div>
         </div>
     </footer>
 
-    <script>
-        // Page Navigation
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.classList.remove('active-page');
-            });
-            
-            // Show the selected page
-            document.getElementById(pageId).classList.add('active-page');
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-            
-            // Close mobile menu if open
-            document.getElementById('navLinks').classList.remove('active');
-        }
+    <!-- Demo Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>PixelCraft Pro Demo</h3>
+                <button class="modal-close" onclick="closeDemo()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <div class="demo-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Interactive Demo Coming Soon!</p>
+                        <p>Experience our tools in action with real-time examples.</p>
+                    </div>
+                </div>
+                <div class="demo-features">
+                    <h4>What you'll see:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Real-time image compression</li>
+                        <li><i class="fas fa-check"></i> AI background removal in action</li>
+                        <li><i class="fas fa-check"></i> Smart image resizing</li>
+                        <li><i class="fas fa-check"></i> Text extraction from images</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Mobile Menu Toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
+    <!-- Success/Error Messages -->
+    <div class="toast" id="toast"></div>
 
-        // Background color custom option toggle
-        document.getElementById('bg-color').addEventListener('change', function() {
-            const customColorGroup = document.getElementById('custom-color-group');
-            if (this.value === 'custom') {
-                customColorGroup.style.display = 'block';
-            } else {
-                customColorGroup.style.display = 'none';
-            }
-        });
-
-        // Simple animations for the page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add animation to service cards on scroll
-            const serviceCards = document.querySelectorAll('.service-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = "1";
-                        entry.target.style.transform = "translateY(0)";
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            serviceCards.forEach(card => {
-                card.style.opacity = "0";
-                card.style.transform = "translateY(20px)";
-                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-                observer.observe(card);
-            });
-            
-            // Add hover effect to buttons
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = "translateY(-3px)";
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = "translateY(0)";
-                });
-            });
-            
-            // Service card hover effect
-            const cards = document.querySelectorAll('.service-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = "translateY(-10px)";
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = "translateY(0)";
-                });
-            });
-        });
-
-        // Image Processing Functions (Placeholder)
-        function processImage(tool) {
-            // This would normally process the image
-            // For demo purposes, we'll just show the result area
-            
-            // Simulate processing delay
-            const processBtn = document.querySelector(`#${tool} .process-btn`);
-            const originalText = processBtn.textContent;
-            processBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            processBtn.disabled = true;
-            
-            setTimeout(() => {
-                document.getElementById(`${tool}Result`).style.display = 'block';
-                processBtn.textContent = originalText;
-                processBtn.disabled = false;
-                
-                // For demo, set a mock reduction percentage
-                if (tool === 'compressor') {
-                    document.getElementById('size-reduction').textContent = '65%';
-                }
-            }, 2000);
-        }
-
-        function downloadResult(tool) {
-            alert(`This would download the processed image from the ${tool} tool. In a real application, this would trigger a file download.`);
-        }
-    </script>
+    <script src="js/main.js"></script>
 </body>
 </html>

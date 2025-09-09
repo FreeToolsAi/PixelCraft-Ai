@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center | PixelCraft Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-crop-alt"></i>
+                    </div>
+                    <div class="logo-text">PixelCraft Pro</div>
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <nav class="nav-links" id="navLinks">
+                    <a href="index.html"><i class="fas fa-home"></i><span>Home</span></a>
+                    <a href="index.html#services"><i class="fas fa-tools"></i><span>Services</span></a>
+                    <a href="about.html"><i class="fas fa-info-circle"></i><span>About</span></a>
+                    <a href="support.html"><i class="fas fa-headset"></i><span>Support</span></a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" style="padding: 100px 0 60px;">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Support Center</h1>
+                <p>Get help with PixelCraft Pro tools, find answers to common questions, or contact our support team for personalized assistance.</p>
+                
+                <!-- Search Bar -->
+                <div style="max-width: 600px; margin: 40px auto 0;">
+                    <div style="position: relative;">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search for help..." 
+                            style="width: 100%; padding: 16px 50px 16px 20px; border: 2px solid var(--light-gray); border-radius: 50px; font-size: 1rem; font-family: inherit;"
+                        >
+                        <button 
+                            style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: var(--primary); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer;"
+                            onclick="searchFAQ()"
+                        >
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Help -->
+    <section style="padding: 60px 0;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Quick Help</h2>
+                <p>Find immediate answers to the most common questions</p>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #e3f2fd; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <i class="fas fa-upload" style="font-size: 32px; color: #2196f3;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px; color: var(--dark);">File Upload Issues</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Having trouble uploading your images?</p>
+                    <button class="btn btn-secondary btn-sm" onclick="showHelp('upload')">
+                        Get Help <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #e8f5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <i class="fas fa-cog" style="font-size: 32px; color: #4caf50;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px; color: var(--dark);">Tool Settings</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Learn how to adjust settings for best results</p>
+                    <button class="btn btn-secondary btn-sm" onclick="showHelp('settings')">
+                        Get Help <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); text-align: center;">
+                    <div style="width: 80px; height: 80px; background: #fff3e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+                        <i class="fas fa-download" style="font-size: 32px; color: #ff9800;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 15px; color: var(--dark);">Download Problems</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">Can't download your processed images?</p>
+                    <button class="btn btn-secondary btn-sm" onclick="showHelp('download')">
+                        Get Help <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="padding: 60px 0; background: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to the most common questions about PixelCraft Pro</p>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What file formats are supported?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>PixelCraft Pro supports all major image formats including:</p>
+                        <ul>
+                            <li><strong>JPEG/JPG</strong> - Most common photo format</li>
+                            <li><strong>PNG</strong> - Best for images with transparency</li>
+                            <li><strong>WebP</strong> - Modern efficient format</li>
+                            <li><strong>GIF</strong> - For animated images (background remover doesn't support animation)</li>
+                            <li><strong>BMP</strong> - Uncompressed bitmap format</li>
+                        </ul>
+                        <p>Maximum file size is 10MB for most tools, 5MB for background remover.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="privacy">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is my data safe and private?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Your privacy is our top priority:</p>
+                        <ul>
+                            <li>Most processing happens directly in your browser</li>
+                            <li>Images are automatically deleted from our servers after processing</li>
+                            <li>We never store, share, or analyze your personal images</li>
+                            <li>All data transmission is encrypted with SSL/TLS</li>
+                            <li>We comply with GDPR and other privacy regulations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Why is my image processing slow?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Processing speed depends on several factors:</p>
+                        <ul>
+                            <li><strong>Image size:</strong> Larger images take more time to process</li>
+                            <li><strong>Internet connection:</strong> Faster connections improve upload/download speeds</li>
+                            <li><strong>Device performance:</strong> More powerful devices process faster</li>
+                            <li><strong>Tool complexity:</strong> AI-powered tools like background removal take longer</li>
+                        </ul>
+                        <p><strong>Tips for faster processing:</strong></p>
+                        <ul>
+                            <li>Resize images before uploading if possible</li>
+                            <li>Use a stable internet connection</li>
+                            <li>Close other browser tabs to free up memory</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="pricing">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is PixelCraft Pro really free?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All our core tools are completely free to use:</p>
+                        <ul>
+                            <li>No registration required</li>
+                            <li>No hidden fees or subscriptions</li>
+                            <li>No watermarks on processed images</li>
+                            <li>Unlimited usage for personal and commercial projects</li>
+                        </ul>
+                        <p>We're supported by ethical advertising and optional donations from users who love our tools.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="technical">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Which browsers are supported?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>PixelCraft Pro works on all modern browsers:</p>
+                        <ul>
+                            <li><strong>Chrome</strong> (recommended) - Version 80+</li>
+                            <li><strong>Firefox</strong> - Version 75+</li>
+                            <li><strong>Safari</strong> - Version 13+</li>
+                            <li><strong>Edge</strong> - Version 80+</li>
+                            <li><strong>Mobile browsers</strong> - iOS Safari, Chrome Mobile</li>
+                        </ul>
+                        <p>For the best experience, we recommend using the latest version of Chrome or Firefox.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="tools">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How accurate is the background remover?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our AI-powered background remover achieves high accuracy with:</p>
+                        <ul>
+                            <li><strong>Clear subjects:</strong> People, products, animals with good contrast</li>
+                            <li><strong>Simple backgrounds:</strong> Solid colors or minimal patterns work best</li>
+                            <li><strong>Good lighting:</strong> Well-lit images produce better results</li>
+                        </ul>
+                        <p><strong>Best practices for optimal results:</strong></p>
+                        <ul>
+                            <li>Use high-resolution images</li>
+                            <li>Ensure good contrast between subject and background</li>
+                            <li>Avoid busy or complex backgrounds when possible</li>
+                            <li>Make sure the subject is clearly defined</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section style="padding: 80px 0;">
+        <div class="container">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="section-title">
+                    <h2>Still Need Help?</h2>
+                    <p>Can't find what you're looking for? Send us a message and we'll get back to you within 24 hours.</p>
+                </div>
+                
+                <form class="contact-form" id="contactForm" style="background: white; padding: 40px; border-radius: var(--border-radius); box-shadow: var(--box-shadow);">
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="name" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark);">Name *</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required 
+                            style="width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); font-family: inherit; font-size: 1rem;"
+                        >
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark);">Email *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required 
+                            style="width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); font-family: inherit; font-size: 1rem;"
+                        >
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="category" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark);">Category</label>
+                        <select 
+                            id="category" 
+                            name="category" 
+                            style="width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); font-family: inherit; font-size: 1rem; background: white;"
+                        >
+                            <option value="">Select a category</option>
+                            <option value="technical">Technical Issue</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="general">General Question</option>
+                            <option value="business">Business Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <label for="subject" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark);">Subject *</label>
+                        <input 
+                            type="text" 
+                            id="subject" 
+                            name="subject" 
+                            required 
+                            style="width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); font-family: inherit; font-size: 1rem;"
+                        >
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 30px;">
+                        <label for="message" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--dark);">Message *</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="6" 
+                            required 
+                            placeholder="Please describe your issue or question in detail..."
+                            style="width: 100%; padding: 12px 16px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); font-family: inherit; font-size: 1rem; resize: vertical;"
+                        ></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Modal -->
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="helpModalTitle">Help Topic</h3>
+                <button class="modal-close" onclick="closeHelpModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="helpModalBody">
+                <!-- Content will be populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PixelCraft Pro</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        Professional image processing tools for creators, designers, and developers.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="tools/compressor.html"><i class="fas fa-compress-alt"></i> Image Compressor</a></li>
+                        <li><a href="tools/background-remover.html"><i class="fas fa-cut"></i> Background Remover</a></li>
+                        <li><a href="tools/resizer.html"><i class="fas fa-expand-alt"></i> Image Resizer</a></li>
+                        <li><a href="tools/text-to-pdf.html"><i class="fas fa-file-pdf"></i> Text to PDF</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="support.html"><i class="fas fa-headset"></i> Support Center</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-video"></i> Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 PixelCraft Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/support.js"></script>
+
+    <style>
+        .faq-item {
+            margin-bottom: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--light);
+        }
+
+        .faq-question h3 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 25px;
+            max-height: 1000px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer ul {
+            color: var(--gray);
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 20px;
+            }
+
+            .faq-answer.active {
+                padding: 20px;
+            }
+
+            .contact-form {
+                padding: 30px 20px !important;
+            }
+
+            #searchInput {
+                padding: 14px 45px 14px 16px !important;
+            }
+        }
+    </style>
+</body>
+</html>
