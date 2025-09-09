@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelCraft Pro | Advanced Image Processing Suite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-crop-alt"></i>
+                    </div>
+                    <div class="logo-text">PixelCraft Pro</div>
+                </a>
+                
+                <!-- Mobile menu toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <!-- Navigation -->
+                <nav class="nav-links" id="navLinks">
+                    <a href="index.html"><i class="fas fa-home"></i><span>Home</span></a>
+                    <a href="#services"><i class="fas fa-tools"></i><span>Services</span></a>
+                    <a href="about.html"><i class="fas fa-info-circle"></i><span>About</span></a>
+                    <a href="support.html"><i class="fas fa-headset"></i><span>Support</span></a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+    <!-- Ad Banner -->
+    <div class="container">
+        <div class="ad-banner">
+            <span>Advertisement Space - 728x90</span>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Images with AI-Powered Tools</h1>
+                <p>Professional-grade image processing suite for designers, developers, and content creators. Experience the power of AI-driven image manipulation at your fingertips.</p>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="scrollToServices()">
+                        <i class="fas fa-bolt"></i> Get Started Free
+                    </button>
+                    <button class="btn btn-secondary" onclick="openDemo()">
+                        <i class="fas fa-video"></i> Watch Demo
+                    </button>
+                </div>
+                
+                <!-- Feature highlights -->
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No Registration Required</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>100% Free Tools</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Instant Processing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Powerful Tools</h2>
+                <p>Everything you need for professional image editing in one place</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Image Compressor -->
+                <div class="service-card" data-service="compressor">
+                    <div class="service-icon" style="background: #e3f2fd; color: #2196f3;">
+                        <i class="fas fa-compress-alt"></i>
+                    </div>
+                    <h3>Image Compressor</h3>
+                    <p>Reduce file size without losing quality. Perfect for web optimization and faster loading times.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 50K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                    <a href="tools/compressor.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Background Remover -->
+                <div class="service-card" data-service="background-remover">
+                    <div class="service-icon" style="background: #e8f5e9; color: #4caf50;">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>ClearCut-BG</h3>
+                    <p>Remove backgrounds automatically with AI precision in seconds. Perfect for product photos and portraits.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 75K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                    <a href="tools/background-remover.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Image Resizer -->
+                <div class="service-card" data-service="resizer">
+                    <div class="service-icon" style="background: #fff3e0; color: #ff9800;">
+                        <i class="fas fa-expand-alt"></i>
+                    </div>
+                    <h3>Resizer Pro</h3>
+                    <p>Resize and crop images to any dimension with smart AI assistance. Maintain quality at any size.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 40K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.7/5</span>
+                    </div>
+                    <a href="tools/resizer.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Text to PDF -->
+                <div class="service-card" data-service="text-to-pdf">
+                    <div class="service-icon" style="background: #f3e5f5; color: #9c27b0;">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Text to PDF</h3>
+                    <p>Convert text documents to professional PDFs with custom layouts and formatting options.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 30K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.6/5</span>
+                    </div>
+                    <a href="tools/text-to-pdf.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- AI Image Generator -->
+                <div class="service-card" data-service="ai-generator">
+                    <div class="service-icon" style="background: #e0f7fa; color: #00bcd4;">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Image Generator</h3>
+                    <p>Create stunning visuals from text prompts with advanced AI models. Unleash your creativity.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 100K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                    <a href="tools/ai-generator.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <!-- Image to Text -->
+                <div class="service-card" data-service="image-to-text">
+                    <div class="service-icon" style="background: #ffebee; color: #f44336;">
+                        <i class="fas fa-text-height"></i>
+                    </div>
+                    <h3>Image to Text</h3>
+                    <p>Extract text and code from images with OCR technology powered by advanced AI recognition.</p>
+                    <div class="service-stats">
+                        <span><i class="fas fa-users"></i> 60K+ users</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                    <a href="tools/image-to-text.html" class="service-link">
+                        Use Tool <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose PixelCraft Pro</h2>
+                <p>Professional tools designed for creators and businesses worldwide</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Process images in seconds with our optimized algorithms and cloud infrastructure powered by cutting-edge technology.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Your files are automatically deleted after processing. We never store your data and ensure complete privacy protection.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3>Unlimited Processing</h3>
+                    <p>No limits on file sizes or number of images. Process as much as you need without any restrictions or hidden fees.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Fully Responsive</h3>
+                    <p>Access all tools from any device. Our interface works perfectly on mobile, tablet, and desktop platforms.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Advanced artificial intelligence ensures the highest quality results with intelligent processing and optimization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Trusted by 500K+</h3>
+                    <p>Join over half a million users who trust PixelCraft Pro for their daily image processing needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="500000">0</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="2500000">0</div>
+                    <div class="stat-label">Images Processed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="99">0</div>
+                    <div class="stat-label">% Uptime</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="6">0</div>
+                    <div class="stat-label">Powerful Tools</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Get the latest updates about new features and tools. No spam, unsubscribe anytime.</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="form-group">
+                        <input type="email" id="emailInput" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Ad -->
+    <div class="container">
+        <div class="footer-ad">
+            <span>Advertisement Space - 728x90</span>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>PixelCraft Pro</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        Professional image processing tools for creators, designers, and developers. Trusted by over 500,000 users worldwide.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tools</h3>
+                    <ul class="footer-links">
+                        <li><a href="tools/compressor.html"><i class="fas fa-compress-alt"></i> Image Compressor</a></li>
+                        <li><a href="tools/background-remover.html"><i class="fas fa-cut"></i> Background Remover</a></li>
+                        <li><a href="tools/resizer.html"><i class="fas fa-expand-alt"></i> Image Resizer</a></li>
+                        <li><a href="tools/text-to-pdf.html"><i class="fas fa-file-pdf"></i> Text to PDF</a></li>
+                        <li><a href="tools/ai-generator.html"><i class="fas fa-robot"></i> AI Generator</a></li>
+                        <li><a href="tools/image-to-text.html"><i class="fas fa-text-height"></i> Image to Text</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-book"></i> Documentation</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-video"></i> Tutorials</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> API</a></li>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal & Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                        <li><a href="#"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
+                        <li><a href="support.html"><i class="fas fa-headset"></i> Support Center</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 PixelCraft Pro. All rights reserved. Made with ❤️ for creators worldwide.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div class="modal" id="demoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>PixelCraft Pro Demo</h3>
+                <button class="modal-close" onclick="closeDemo()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="video-container">
+                    <div class="demo-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Interactive Demo Coming Soon!</p>
+                        <p>Experience our tools in action with real-time examples.</p>
+                    </div>
+                </div>
+                <div class="demo-features">
+                    <h4>What you'll see:</h4>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Real-time image compression</li>
+                        <li><i class="fas fa-check"></i> AI background removal in action</li>
+                        <li><i class="fas fa-check"></i> Smart image resizing</li>
+                        <li><i class="fas fa-check"></i> Text extraction from images</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
