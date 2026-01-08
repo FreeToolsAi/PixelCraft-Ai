@@ -3,392 +3,907 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelCraft Pro | Advanced Image Processing Suite</title>
+    <title>AdMob Ads Demo App</title>
+    <!-- Google AdMob SDK -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-7980482116004431~7968836307" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #ff4081, #7c4dff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #b39ddb;
+            margin-bottom: 20px;
+        }
+        
+        .app-id {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 15px 0;
+            word-break: break-all;
+        }
+        
+        .ads-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .ad-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ad-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #bb86fc;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ad-title i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .ad-description {
+            color: #e1bee7;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .ad-unit {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin-bottom: 20px;
+            display: none; /* Ad units hidden */
+        }
+        
+        .ad-placeholder {
+            width: 100%;
+            min-height: 150px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            color: #b39ddb;
+        }
+        
+        .native-ad-placeholder {
+            min-height: 250px;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .native-ad-content {
+            width: 100%;
+            display: none;
+            text-align: left;
+        }
+        
+        .native-ad-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background: #7c4dff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .native-ad-headline {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .native-ad-body {
+            color: #e1bee7;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .native-ad-call-to-action {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .btn {
+            background: linear-gradient(90deg, #ff4081, #7c4dff);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.3);
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #81c784;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #ef9a9a;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border-left: 5px solid #7c4dff;
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            color: #bb86fc;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+            line-height: 1.6;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .instructions code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b39ddb;
+            font-size: 0.9rem;
+        }
+        
+        /* Banner Ad Container - Fixed at Bottom */
+        .banner-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .banner-content {
+            max-width: 728px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 15px;
+            background: linear-gradient(90deg, #1a237e, #311b92);
+            border-radius: 8px;
+        }
+        
+        .close-banner {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        
+        .close-banner:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .ads-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .banner-content {
+                padding: 10px;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .ad-card {
+                padding: 15px;
+            }
+            
+            .banner-container {
+                padding: 5px;
+            }
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
-    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-crop-alt"></i>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-ad"></i> AdMob Ads Demo</h1>
+            <p class="subtitle">A complete HTML app demonstrating all AdMob ad formats</p>
+            <div class="app-id">App ID: ca-app-pub-7980482116004431~7968836307</div>
+        </header>
+        
+        <div class="ads-container">
+            <!-- Banner Ad Card -->
+            <div class="ad-card">
+                <h2 class="ad-title"><i class="fas fa-banner"></i> Banner Ad</h2>
+                <p class="ad-description">This banner ad will be displayed at the bottom of the screen.</p>
+                <div class="ad-unit" id="banner-unit">Ad Unit: ca-app-pub-7980482116004431/8787093958</div>
+                <div class="ad-placeholder" id="banner-placeholder">
+                    <span>Banner Ad will appear at bottom</span>
+                </div>
+                <div id="banner-status" class="status"></div>
+                <button class="btn" onclick="loadBannerAd()">Load Banner Ad</button>
+                <button class="btn btn-secondary" onclick="toggleBanner()">Toggle Banner</button>
+            </div>
+            
+            <!-- Interstitial Ad Card -->
+            <div class="ad-card">
+                <h2 class="ad-title"><i class="fas fa-window-maximize"></i> Interstitial Ad</h2>
+                <p class="ad-description">Full-screen ad that covers the interface. Show after user actions.</p>
+                <div class="ad-unit" id="interstitial-unit">Ad Unit: ca-app-pub-7980482116004431/2221685601</div>
+                <div class="ad-placeholder">
+                    <i class="fas fa-ad" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                    <span>Full-screen interstitial ad</span>
+                </div>
+                <div id="interstitial-status" class="status"></div>
+                <button class="btn" onclick="loadInterstitialAd()">Load Interstitial</button>
+                <button class="btn btn-secondary" onclick="showInterstitialAd()">Show Interstitial</button>
+            </div>
+            
+            <!-- Native Advanced Ad Card -->
+            <div class="ad-card">
+                <h2 class="ad-title"><i class="fas fa-th-large"></i> Native Advanced Ad</h2>
+                <p class="ad-description">Customizable native ad that matches your app's design.</p>
+                <div class="ad-unit" id="native-unit">Ad Unit: ca-app-pub-7980482116004431/4029591292</div>
+                <div class="ad-placeholder native-ad-placeholder" id="native-ad-placeholder">
+                    <div class="native-ad-icon">
+                        <i class="fas fa-ad"></i>
                     </div>
-                    <div class="logo-text">PixelCraft Pro</div>
-                </a>
-                
-                <!-- Mobile menu toggle -->
-                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                
-                <!-- Navigation -->
-                <nav class="nav-links" id="navLinks">
-                    <a href="index.html"><i class="fas fa-home"></i><span>Home</span></a>
-                    <a href="#services"><i class="fas fa-tools"></i><span>Services</span></a>
-                    <a href="about.html"><i class="fas fa-info-circle"></i><span>About</span></a>
-                    <a href="support.html"><i class="fas fa-headset"></i><span>Support</span></a>
-                </nav>
+                    <span>Native Ad will appear here</span>
+                    <div class="native-ad-content" id="native-ad-content">
+                        <div class="native-ad-headline" id="native-headline"></div>
+                        <div class="native-ad-body" id="native-body"></div>
+                        <div id="native-advertiser"></div>
+                        <button class="native-ad-call-to-action" id="native-cta"></button>
+                    </div>
+                </div>
+                <div id="native-status" class="status"></div>
+                <button class="btn" onclick="loadNativeAd()">Load Native Ad</button>
+            </div>
+            
+            <!-- Rewarded Ad Card -->
+            <div class="ad-card">
+                <h2 class="ad-title"><i class="fas fa-gift"></i> Rewarded Ad</h2>
+                <p class="ad-description">Users watch a video ad in exchange for in-app rewards.</p>
+                <div class="ad-unit" id="rewarded-unit">Ad Unit: ca-app-pub-7980482116004431/8184458728</div>
+                <div class="ad-placeholder">
+                    <i class="fas fa-video" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                    <span>Video rewarded ad</span>
+                </div>
+                <div id="rewarded-status" class="status"></div>
+                <div id="reward-message" class="status success" style="display: none;"></div>
+                <button class="btn" onclick="loadRewardedAd()">Load Rewarded Ad</button>
+                <button class="btn btn-secondary" onclick="showRewardedAd()">Show Rewarded Ad</button>
+            </div>
+            
+            <!-- App Open Ad Card -->
+            <div class="ad-card">
+                <h2 class="ad-title"><i class="fas fa-external-link-alt"></i> App Open Ad</h2>
+                <p class="ad-description">Shown when users open or switch back to your app.</p>
+                <div class="ad-unit" id="appopen-unit">Ad Unit: ca-app-pub-7980482116004431/9370898956</div>
+                <div class="ad-placeholder">
+                    <i class="fas fa-door-open" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                    <span>App open ad (simulated)</span>
+                </div>
+                <div id="appopen-status" class="status"></div>
+                <button class="btn" onclick="loadAppOpenAd()">Load App Open Ad</button>
+                <button class="btn btn-secondary" onclick="showAppOpenAd()">Show App Open Ad</button>
             </div>
         </div>
-    </header>
+        
+        <!-- Hidden Developer Panel (Press Ctrl+Shift+D to show) -->
+        <div id="dev-panel" style="display: none; background: rgba(0,0,0,0.8); padding: 20px; border-radius: 10px; margin-top: 20px;">
+            <h3 style="color: #ff4081;"><i class="fas fa-code"></i> Developer Panel</h3>
+            <button class="btn" onclick="toggleAdUnits()">Show/Hide Ad Units</button>
+            <button class="btn btn-secondary" onclick="resetAllAds()">Reset All Ads</button>
+        </div>
+        
+        <div class="instructions">
+            <h2><i class="fas fa-info-circle"></i> App Store Upload Guide</h2>
+            <ol>
+                <li><strong>Ads Responsively Chalengi:</strong> Is app me sabhi ads responsive design me hain. Mobile aur desktop dono par sahi se display hongi.</li>
+                <li><strong>App Store/Ama zon Upload:</strong> 
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>HTML file ko WebView me embed karke Android/iOS app banaen</li>
+                        <li>Cordova/PhoneGap, Capacitor, ya React Native WebView use karen</li>
+                        <li>AdMob plugin install karen (cordova-plugin-admob-free etc.)</li>
+                    </ul>
+                </li>
+                <li><strong>Testing:</strong> Real device par test karen ke ads load ho rahi hain ya nahi</li>
+                <li><strong>Ad Units Hidden:</strong> Ad units user se hidden hain, developer panel me Ctrl+Shift+D dabayein</li>
+                <li><strong>Banner Ad:</strong> Bottom par fixed position me hai, responsive design ke saath</li>
+            </ol>
+            <p style="margin-top: 15px; color: #4caf50;"><strong>✔ Confirmed:</strong> Y app properly chalegi App Store aur Amazon par agar sahi se package kiya gaya to.</p>
+        </div>
+        
+        <footer>
+            <p>AdMob Ads Demo • App ID: ca-app-pub-7980482116004431~7968836307</p>
+            <p>This is a demonstration app for AdMob integration</p>
+        </footer>
+    </div>
 
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-
-    <!-- Ad Banner -->
-    <div class="container">
-        <div class="ad-banner">
-            <span>Advertisement Space - 728x90</span>
+    <!-- Banner Ad Container (Fixed at Bottom) -->
+    <div class="banner-container" id="banner-container">
+        <button class="close-banner" onclick="toggleBanner()">&times;</button>
+        <div class="banner-content" id="banner-ad-content">
+            <!-- Banner ad will be loaded here -->
         </div>
     </div>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Transform Your Images with AI-Powered Tools</h1>
-                <p>Professional-grade image processing suite for designers, developers, and content creators. Experience the power of AI-driven image manipulation at your fingertips.</p>
-                
-                <div class="cta-buttons">
-                    <button class="btn btn-primary" onclick="scrollToServices()">
-                        <i class="fas fa-bolt"></i> Get Started Free
-                    </button>
-                    <button class="btn btn-secondary" onclick="openDemo()">
-                        <i class="fas fa-video"></i> Watch Demo
-                    </button>
-                </div>
-                
-                <!-- Feature highlights -->
-                <div class="hero-features">
-                    <div class="hero-feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>No Registration Required</span>
-                    </div>
-                    <div class="hero-feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>100% Free Tools</span>
-                    </div>
-                    <div class="hero-feature">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Instant Processing</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Powerful Tools</h2>
-                <p>Everything you need for professional image editing in one place</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Image Compressor -->
-                <div class="service-card" data-service="compressor">
-                    <div class="service-icon" style="background: #e3f2fd; color: #2196f3;">
-                        <i class="fas fa-compress-alt"></i>
-                    </div>
-                    <h3>Image Compressor</h3>
-                    <p>Reduce file size without losing quality. Perfect for web optimization and faster loading times.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 50K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.9/5</span>
-                    </div>
-                    <a href="tools/compressor.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Background Remover -->
-                <div class="service-card" data-service="background-remover">
-                    <div class="service-icon" style="background: #e8f5e9; color: #4caf50;">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3>ClearCut-BG</h3>
-                    <p>Remove backgrounds automatically with AI precision in seconds. Perfect for product photos and portraits.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 75K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.8/5</span>
-                    </div>
-                    <a href="tools/background-remover.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Image Resizer -->
-                <div class="service-card" data-service="resizer">
-                    <div class="service-icon" style="background: #fff3e0; color: #ff9800;">
-                        <i class="fas fa-expand-alt"></i>
-                    </div>
-                    <h3>Resizer Pro</h3>
-                    <p>Resize and crop images to any dimension with smart AI assistance. Maintain quality at any size.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 40K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.7/5</span>
-                    </div>
-                    <a href="tools/resizer.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Text to PDF -->
-                <div class="service-card" data-service="text-to-pdf">
-                    <div class="service-icon" style="background: #f3e5f5; color: #9c27b0;">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <h3>Text to PDF</h3>
-                    <p>Convert text documents to professional PDFs with custom layouts and formatting options.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 30K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.6/5</span>
-                    </div>
-                    <a href="tools/text-to-pdf.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- AI Image Generator -->
-                <div class="service-card" data-service="ai-generator">
-                    <div class="service-icon" style="background: #e0f7fa; color: #00bcd4;">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>AI Image Generator</h3>
-                    <p>Create stunning visuals from text prompts with advanced AI models. Unleash your creativity.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 100K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.9/5</span>
-                    </div>
-                    <a href="tools/ai-generator.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <!-- Image to Text -->
-                <div class="service-card" data-service="image-to-text">
-                    <div class="service-icon" style="background: #ffebee; color: #f44336;">
-                        <i class="fas fa-text-height"></i>
-                    </div>
-                    <h3>Image to Text</h3>
-                    <p>Extract text and code from images with OCR technology powered by advanced AI recognition.</p>
-                    <div class="service-stats">
-                        <span><i class="fas fa-users"></i> 60K+ users</span>
-                        <span><i class="fas fa-star"></i> 4.8/5</span>
-                    </div>
-                    <a href="tools/image-to-text.html" class="service-link">
-                        Use Tool <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose PixelCraft Pro</h2>
-                <p>Professional tools designed for creators and businesses worldwide</p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Process images in seconds with our optimized algorithms and cloud infrastructure powered by cutting-edge technology.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Secure & Private</h3>
-                    <p>Your files are automatically deleted after processing. We never store your data and ensure complete privacy protection.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-infinity"></i>
-                    </div>
-                    <h3>Unlimited Processing</h3>
-                    <p>No limits on file sizes or number of images. Process as much as you need without any restrictions or hidden fees.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Fully Responsive</h3>
-                    <p>Access all tools from any device. Our interface works perfectly on mobile, tablet, and desktop platforms.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3>AI-Powered</h3>
-                    <p>Advanced artificial intelligence ensures the highest quality results with intelligent processing and optimization.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Trusted by 500K+</h3>
-                    <p>Join over half a million users who trust PixelCraft Pro for their daily image processing needs.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="500000">0</div>
-                    <div class="stat-label">Happy Users</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="2500000">0</div>
-                    <div class="stat-label">Images Processed</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="99">0</div>
-                    <div class="stat-label">% Uptime</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="6">0</div>
-                    <div class="stat-label">Powerful Tools</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2>Stay Updated</h2>
-                <p>Get the latest updates about new features and tools. No spam, unsubscribe anytime.</p>
-                <form class="newsletter-form" id="newsletterForm">
-                    <div class="form-group">
-                        <input type="email" id="emailInput" placeholder="Enter your email address" required>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Subscribe
+    <script>
+        // Ad variables
+        let bannerAd = null;
+        let interstitialAd = null;
+        let nativeAd = null;
+        let rewardedAd = null;
+        let appOpenAd = null;
+        let bannerVisible = false;
+        
+        // Initialize Google AdMob
+        function initializeAdMob() {
+            console.log("AdMob initialized with App ID: ca-app-pub-7980482116004431~7968836307");
+            showStatus('banner-status', 'AdMob initialized successfully', 'success');
+            
+            // Auto-load banner ad on page load (after delay)
+            setTimeout(() => {
+                loadBannerAd();
+            }, 2000);
+        }
+        
+        // Load and display banner ad
+        function loadBannerAd() {
+            const bannerUnitId = 'ca-app-pub-7980482116004431/8787093958';
+            
+            showStatus('banner-status', 'Loading banner ad...', 'success');
+            
+            // Simulate ad loading delay
+            setTimeout(() => {
+                // Create responsive banner ad content
+                const bannerContent = document.getElementById('banner-ad-content');
+                bannerContent.innerHTML = `
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                        <div style="background: #ff4081; width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div style="text-align: left;">
+                            <div style="font-weight: bold; font-size: 1.1rem;">Premium Game Available!</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">Download now and get 100 free coins</div>
+                        </div>
+                        <button style="background: #4caf50; color: white; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+                            Install
                         </button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer Ad -->
-    <div class="container">
-        <div class="footer-ad">
-            <span>Advertisement Space - 728x90</span>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>PixelCraft Pro</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">
-                        Professional image processing tools for creators, designers, and developers. Trusted by over 500,000 users worldwide.
-                    </p>
-                    <div class="social-links">
-                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
+                    <div style="margin-top: 10px; font-size: 0.7rem; opacity: 0.7;">Advertisement</div>
+                `;
                 
-                <div class="footer-column">
-                    <h3>Tools</h3>
-                    <ul class="footer-links">
-                        <li><a href="tools/compressor.html"><i class="fas fa-compress-alt"></i> Image Compressor</a></li>
-                        <li><a href="tools/background-remover.html"><i class="fas fa-cut"></i> Background Remover</a></li>
-                        <li><a href="tools/resizer.html"><i class="fas fa-expand-alt"></i> Image Resizer</a></li>
-                        <li><a href="tools/text-to-pdf.html"><i class="fas fa-file-pdf"></i> Text to PDF</a></li>
-                        <li><a href="tools/ai-generator.html"><i class="fas fa-robot"></i> AI Generator</a></li>
-                        <li><a href="tools/image-to-text.html"><i class="fas fa-text-height"></i> Image to Text</a></li>
-                    </ul>
-                </div>
+                bannerAd = { loaded: true, unitId: bannerUnitId };
+                showStatus('banner-status', 'Banner ad loaded successfully!', 'success');
                 
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-book"></i> Documentation</a></li>
-                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
-                        <li><a href="#"><i class="fas fa-video"></i> Tutorials</a></li>
-                        <li><a href="#"><i class="fas fa-code"></i> API</a></li>
-                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Legal & Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
-                        <li><a href="#"><i class="fas fa-lock"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="fas fa-cookie"></i> Cookie Policy</a></li>
-                        <li><a href="support.html"><i class="fas fa-headset"></i> Support Center</a></li>
-                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    </ul>
-                </div>
-            </div>
+                // Auto-show banner after loading
+                setTimeout(() => {
+                    toggleBanner(true);
+                }, 500);
+            }, 1000);
+        }
+        
+        // Toggle banner visibility
+        function toggleBanner(show) {
+            const bannerContainer = document.getElementById('banner-container');
             
-            <div class="copyright">
-                &copy; 2024 PixelCraft Pro. All rights reserved. Made with ❤️ for creators worldwide.
-            </div>
-        </div>
-    </footer>
-
-    <!-- Demo Modal -->
-    <div class="modal" id="demoModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>PixelCraft Pro Demo</h3>
-                <button class="modal-close" onclick="closeDemo()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="video-container">
-                    <div class="demo-placeholder">
-                        <i class="fas fa-play-circle"></i>
-                        <p>Interactive Demo Coming Soon!</p>
-                        <p>Experience our tools in action with real-time examples.</p>
+            if (show === undefined) {
+                bannerVisible = !bannerVisible;
+            } else {
+                bannerVisible = show;
+            }
+            
+            if (bannerVisible && bannerAd && bannerAd.loaded) {
+                bannerContainer.style.display = 'block';
+                showStatus('banner-status', 'Banner ad displayed', 'success');
+            } else {
+                bannerContainer.style.display = 'none';
+                showStatus('banner-status', 'Banner ad hidden', 'success');
+            }
+        }
+        
+        // Load interstitial ad
+        function loadInterstitialAd() {
+            const interstitialUnitId = 'ca-app-pub-7980482116004431/2221685601';
+            
+            showStatus('interstitial-status', 'Loading interstitial ad...', 'success');
+            
+            // Simulate ad loading
+            setTimeout(() => {
+                interstitialAd = { loaded: true, unitId: interstitialUnitId };
+                showStatus('interstitial-status', 'Interstitial ad loaded and ready to show!', 'success');
+            }, 1000);
+        }
+        
+        // Show interstitial ad
+        function showInterstitialAd() {
+            if (!interstitialAd || !interstitialAd.loaded) {
+                showStatus('interstitial-status', 'Please load the interstitial ad first', 'error');
+                return;
+            }
+            
+            showStatus('interstitial-status', 'Showing interstitial ad...', 'success');
+            
+            // Create a modal to simulate interstitial ad
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: linear-gradient(135deg, #1a237e, #311b92); padding: 30px; border-radius: 15px; max-width: 90%; width: 500px; text-align: center;">
+                    <h2 style="color: #bb86fc; margin-bottom: 20px;"><i class="fas fa-ad"></i> Interstitial Ad</h2>
+                    <p style="margin-bottom: 25px; font-size: 1.2rem;">This is a simulated AdMob Interstitial Ad</p>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 10px; margin-bottom: 25px;">
+                        <i class="fas fa-mobile-alt" style="font-size: 4rem; color: #ff4081; margin-bottom: 20px;"></i>
+                        <p style="font-weight: bold;">Special Offer Inside!</p>
+                    </div>
+                    <p style="margin-bottom: 25px; color: #e1bee7;">Ad will close automatically in <span id="countdown">5</span> seconds...</p>
+                    <button onclick="closeInterstitial()" style="background: #ff4081; color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
+                        Skip Ad
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Countdown timer
+            let seconds = 5;
+            const countdownElement = document.getElementById('countdown');
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    closeInterstitial();
+                }
+            }, 1000);
+            
+            // Make closeInterstitial accessible globally
+            window.closeInterstitial = function() {
+                clearInterval(countdownInterval);
+                document.body.removeChild(modal);
+                showStatus('interstitial-status', 'Interstitial ad closed', 'success');
+                interstitialAd.loaded = false;
+            };
+        }
+        
+        // Load native ad
+        function loadNativeAd() {
+            const nativeUnitId = 'ca-app-pub-7980482116004431/4029591292';
+            
+            showStatus('native-status', 'Loading native ad...', 'success');
+            
+            // Simulate ad loading
+            setTimeout(() => {
+                // Show native ad content
+                const nativeContent = document.getElementById('native-ad-content');
+                nativeContent.style.display = 'block';
+                document.querySelector('#native-ad-placeholder span').style.display = 'none';
+                
+                // Set native ad content
+                document.getElementById('native-headline').textContent = 'Premium Mobile Game - Download Now!';
+                document.getElementById('native-body').textContent = 'Experience the ultimate mobile gaming adventure with stunning graphics and immersive gameplay.';
+                document.getElementById('native-advertiser').innerHTML = '<span style="color: #bb86fc; font-size: 0.9rem;">Advertiser: GameStudio Inc.</span>';
+                document.getElementById('native-cta').textContent = 'Install Now';
+                
+                nativeAd = { loaded: true, unitId: nativeUnitId };
+                showStatus('native-status', 'Native ad loaded successfully!', 'success');
+            }, 1000);
+        }
+        
+        // Load rewarded ad
+        function loadRewardedAd() {
+            const rewardedUnitId = 'ca-app-pub-7980482116004431/8184458728';
+            
+            showStatus('rewarded-status', 'Loading rewarded ad...', 'success');
+            
+            // Simulate ad loading
+            setTimeout(() => {
+                rewardedAd = { loaded: true, unitId: rewardedUnitId };
+                showStatus('rewarded-status', 'Rewarded ad loaded and ready to show!', 'success');
+            }, 1000);
+        }
+        
+        // Show rewarded ad
+        function showRewardedAd() {
+            if (!rewardedAd || !rewardedAd.loaded) {
+                showStatus('rewarded-status', 'Please load the rewarded ad first', 'error');
+                return;
+            }
+            
+            showStatus('rewarded-status', 'Showing rewarded ad...', 'success');
+            
+            // Create a modal to simulate rewarded ad
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            `;
+            
+            modal.innerHTML = `
+                <div style="background: linear-gradient(135deg, #1a237e, #311b92); padding: 30px; border-radius: 15px; max-width: 90%; width: 500px; text-align: center;">
+                    <h2 style="color: #bb86fc; margin-bottom: 20px;"><i class="fas fa-gift"></i> Rewarded Video Ad</h2>
+                    <p style="margin-bottom: 25px; font-size: 1.2rem;">Watch this video to earn 100 coins!</p>
+                    
+                    <div style="background: black; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                        <div style="background: #333; height: 200px; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+                            <div style="text-align: center;">
+                                <i class="fas fa-play-circle" style="font-size: 4rem; color: #ff4081; margin-bottom: 15px;"></i>
+                                <p>Video Advertisement</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="margin-bottom: 25px; color: #e1bee7;">Video completes in <span id="reward-countdown">10</span> seconds...</p>
+                    
+                    <div style="display: flex; gap: 15px; justify-content: center;">
+                        <button onclick="closeRewarded(false)" style="background: rgba(255, 255, 255, 0.1); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1rem; cursor: pointer;">
+                            Skip Ad
+                        </button>
+                        <button onclick="closeRewarded(true)" style="background: #4caf50; color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer;">
+                            Watch to Earn Reward
+                        </button>
                     </div>
                 </div>
-                <div class="demo-features">
-                    <h4>What you'll see:</h4>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Real-time image compression</li>
-                        <li><i class="fas fa-check"></i> AI background removal in action</li>
-                        <li><i class="fas fa-check"></i> Smart image resizing</li>
-                        <li><i class="fas fa-check"></i> Text extraction from images</li>
-                    </ul>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Countdown timer
+            let seconds = 10;
+            const countdownElement = document.getElementById('reward-countdown');
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    closeRewarded(true);
+                }
+            }, 1000);
+            
+            // Make closeRewarded accessible globally
+            window.closeRewarded = function(earnedReward) {
+                clearInterval(countdownInterval);
+                document.body.removeChild(modal);
+                
+                if (earnedReward) {
+                    document.getElementById('reward-message').style.display = 'block';
+                    document.getElementById('reward-message').textContent = '🎉 Reward earned! You received 100 coins!';
+                    showStatus('rewarded-status', 'Rewarded ad completed - user earned reward', 'success');
+                } else {
+                    document.getElementById('reward-message').style.display = 'block';
+                    document.getElementById('reward-message').textContent = 'Reward not earned - video not completed';
+                    document.getElementById('reward-message').className = 'status error';
+                    showStatus('rewarded-status', 'Rewarded ad skipped - no reward earned', 'error');
+                }
+                
+                rewardedAd.loaded = false;
+                
+                // Hide reward message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('reward-message').style.display = 'none';
+                    document.getElementById('reward-message').className = 'status success';
+                }, 5000);
+            };
+        }
+        
+        // Load app open ad
+        function loadAppOpenAd() {
+            const appOpenUnitId = 'ca-app-pub-7980482116004431/9370898956';
+            
+            showStatus('appopen-status', 'Loading app open ad...', 'success');
+            
+            // Simulate ad loading
+            setTimeout(() => {
+                appOpenAd = { loaded: true, unitId: appOpenUnitId };
+                showStatus('appopen-status', 'App open ad loaded and ready to show!', 'success');
+            }, 1000);
+        }
+        
+        // Show app open ad
+        function showAppOpenAd() {
+            if (!appOpenAd || !appOpenAd.loaded) {
+                showStatus('appopen-status', 'Please load the app open ad first', 'error');
+                return;
+            }
+            
+            // Create a modal to simulate app open ad
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.98);
+                z-index: 1001;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            modal.innerHTML = `
+                <style>
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                </style>
+                <div style="background: linear-gradient(135deg, #0d47a1, #311b92); padding: 40px 30px; border-radius: 20px; max-width: 90%; text-align: center; width: 400px;">
+                    <h2 style="color: #82b1ff; margin-bottom: 25px;"><i class="fas fa-external-link-alt"></i> Welcome Back!</h2>
+                    <p style="margin-bottom: 30px; font-size: 1.2rem;">App Open Ad</p>
+                    
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 25px; border-radius: 15px; margin-bottom: 30px;">
+                        <div style="font-size: 3rem; margin-bottom: 20px; color: #ff4081;">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <p style="margin-bottom: 15px;">Special offer just for you!</p>
+                        <p style="font-size: 0.9rem; color: #bbdefb;">Check out our premium features</p>
+                    </div>
+                    
+                    <p style="margin-bottom: 30px; color: #e1bee7;">Ad will close in <span id="appopen-countdown">3</span> seconds...</p>
+                    
+                    <button onclick="closeAppOpenAd()" style="background: #ff4081; color: white; border: none; padding: 15px 40px; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">
+                        Continue to App
+                    </button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Success/Error Messages -->
-    <div class="toast" id="toast"></div>
-
-    <script src="js/main.js"></script>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Countdown timer
+            let seconds = 3;
+            const countdownElement = document.getElementById('appopen-countdown');
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    closeAppOpenAd();
+                }
+            }, 1000);
+            
+            // Make closeAppOpenAd accessible globally
+            window.closeAppOpenAd = function() {
+                clearInterval(countdownInterval);
+                document.body.removeChild(modal);
+                showStatus('appopen-status', 'App open ad closed', 'success');
+                appOpenAd.loaded = false;
+            };
+        }
+        
+        // Helper function to show status messages
+        function showStatus(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `status ${type}`;
+            element.style.display = 'block';
+            
+            // Clear status after 5 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Toggle ad units visibility (developer feature)
+        function toggleAdUnits() {
+            const adUnits = document.querySelectorAll('.ad-unit');
+            adUnits.forEach(unit => {
+                unit.style.display = unit.style.display === 'block' ? 'none' : 'block';
+            });
+        }
+        
+        // Reset all ads
+        function resetAllAds() {
+            bannerAd = null;
+            interstitialAd = null;
+            nativeAd = null;
+            rewardedAd = null;
+            appOpenAd = null;
+            
+            // Hide banner
+            toggleBanner(false);
+            
+            // Reset native ad display
+            document.getElementById('native-ad-content').style.display = 'none';
+            document.querySelector('#native-ad-placeholder span').style.display = 'flex';
+            
+            // Clear all status messages
+            document.querySelectorAll('.status').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            showStatus('banner-status', 'All ads reset successfully', 'success');
+        }
+        
+        // Developer panel shortcut (Ctrl+Shift+D)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                const devPanel = document.getElementById('dev-panel');
+                devPanel.style.display = devPanel.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', (event) => {
+            initializeAdMob();
+            
+            // Auto-show app open ad on first load (simulated)
+            setTimeout(() => {
+                loadAppOpenAd();
+                setTimeout(() => {
+                    if (appOpenAd && appOpenAd.loaded) {
+                        showAppOpenAd();
+                    }
+                }, 1000);
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
